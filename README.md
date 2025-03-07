@@ -5,3 +5,6 @@
 
 
 This plugin leverages AI to automatically audit your Figma designs for accessibility, consistency, and best practices. Whether you're a designer, developer, or product manager, Uki helps you create better, more inclusive user interfaces with actionable insights.
+
+
+![image](https://github.com/user-attachments/assets/12924315-5e23-4590-b2ab-616a9afbcf02)
