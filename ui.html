@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uki AI UI Auditor</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        button { padding: 10px; background: #6200ea; color: white; border: none; cursor: pointer; }
+        .result { margin-top: 10px; padding: 8px; border: 1px solid #ddd; }
+    </style>
+</head>
+<body>
+    <h2>Uki AI UI Auditor</h2>
+    <p>Scan your Figma design for basic accessibility issues.</p>
+    <button id="scan">Run Audit</button>
+    <div id="results"></div>
+    <button id="close">Close Plugin</button>
+
+    <script>
+        document.getElementById("scan").onclick = () => parent.postMessage({ pluginMessage: { type: "scan" } }, "*");
+        document.getElementById("close").onclick = () => parent.postMessage({ pluginMessage: { type: "close" } }, "*");
+
+        window.onmessage = (event) => {
+            const msg = event.data.pluginMessage;
+            if (msg.type === "results") {
+                const resultsDiv = document.getElementById("results");
+                resultsDiv.innerHTML = "<h3>Results:</h3>";
+
+                msg.data.forEach((item) => {
+                    resultsDiv.innerHTML += `<div class="result">
+                        <strong>${item.name}</strong><br>
+                        Font Size: ${item.fontSize}px<br>
+                        Contrast: ${item.contrast}
+                    </div>`;
+                });
+            }
+        };
+    </script>
+</body>
+</html>
